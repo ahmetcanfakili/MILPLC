@@ -6,37 +6,33 @@
         xmlns:local="clr-namespace:MILPLC"
         mc:Ignorable="d"
         xmlns:dock="https://github.com/Dirkster99/AvalonDock"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MILPLC" Height="540" Width="960" WindowStartupLocation="CenterScreen">
+    
     <Grid>
         <dock:DockingManager x:Name="dockManager">
-
             <dock:LayoutRoot>
-
                 <dock:LayoutPanel Orientation="Horizontal">
-
-                    <dock:LayoutAnchorablePaneGroup DockWidth="200">
-                
-                    </dock:LayoutAnchorablePaneGroup>
-
                     <dock:LayoutDocumentPaneGroup>
                         <dock:LayoutDocumentPane>
-                            <dock:LayoutDocument Title="Doküman 1">
-                                <TextBlock Text="Bu Bir Dokümandır" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <dock:LayoutDocument Title="Projects">
                             </dock:LayoutDocument>
-                            <dock:LayoutDocument Title="Doküman 2">
-                                <TextBlock Text="Başka Bir Doküman" Margin="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                         
+                        </dock:LayoutDocumentPane>
+                        <dock:LayoutDocumentPane>
+                            <dock:LayoutDocument Title="Ladder Editor">
                             </dock:LayoutDocument>
+                   
+                        </dock:LayoutDocumentPane>
+                        <dock:LayoutDocumentPane>
+                            <dock:LayoutDocument Title="Components">
+                            </dock:LayoutDocument>
+                 
                         </dock:LayoutDocumentPane>
                     </dock:LayoutDocumentPaneGroup>
-
-                    <dock:LayoutAnchorablePaneGroup DockWidth="200">
-                  
-                    </dock:LayoutAnchorablePaneGroup>
-
+                    
                 </dock:LayoutPanel>
-
             </dock:LayoutRoot>
-
         </dock:DockingManager>
     </Grid>
+    
 </Window>
