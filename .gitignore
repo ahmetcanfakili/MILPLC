@@ -1,0 +1,96 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio files
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code workspace
+*.code-workspace
+
+# Build artifacts
+*.dll
+*.exe
+*.pdb
+*.mdb
+*.cache
+*.log
+*.vspscc
+*.dbmdl
+*.dbproj.schemaview
+*.bak
+*.backup
+
+# NuGet packages
+*.nupkg
+# The packages folder can be ignored because of restore
+**/packages/*
+# Except build/, which is used as an MSBuild target.
+!**/packages/build/
+# Uncomment if necessary
+#!**/packages/repositories.config
+
+# DotNet CLI
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Auto-generated files
+Generated\ Files/
+TestResults/
+*.TestResult.xml
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# User-specific files
+*.rsuser
+*.sln.docstates
+*.userprefs
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# Coverage and reports
+*.coverage
+*.coveragexml
+coverage/
+CoverageResults/
+TestResults/
+*.trx
+
+# Entity Framework
+Migrations/
+
+# Publish output
+publish/
+*.pubxml
+*.publishproj
+
+# Other
+*.swp
+*.DS_Store
+Thumbs.db
+
+# ASP.NET specific
+appsettings.Development.json
+appsettings.*.json
+secrets.json
+wwwroot/
+node_modules/
+bower_components/
