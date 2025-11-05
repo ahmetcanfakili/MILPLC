@@ -13,4 +13,22 @@
     <PackageReference Include="Dirkster.AvalonDock.Themes.VS2013" Version="4.72.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Resource Include="images\icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ProjectsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ComponentsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\LadderEditorView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>
