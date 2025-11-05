@@ -63,12 +63,16 @@
             <dock:DockingManager x:Name="DockManager">
                 <dock:LayoutRoot>
                     <dock:LayoutPanel Orientation="Horizontal">
+
                         <dock:LayoutDocumentPaneGroup>
                             <dock:LayoutDocumentPane DockWidth="1*">
                                 <dock:LayoutDocument Title="Projects">
                                     <views:ProjectsView/>
                                 </dock:LayoutDocument>
                             </dock:LayoutDocumentPane>
+                        </dock:LayoutDocumentPaneGroup>
+
+                        <dock:LayoutDocumentPaneGroup Orientation="Vertical">
                             <dock:LayoutDocumentPane DockWidth="4*">
                                 <dock:LayoutDocument Title="Variables">
                                     <views:VariableTableView/>
@@ -79,12 +83,16 @@
                                     <views:LadderEditorView/>
                                 </dock:LayoutDocument>
                             </dock:LayoutDocumentPane>
+                        </dock:LayoutDocumentPaneGroup>
+
+                        <dock:LayoutDocumentPaneGroup>
                             <dock:LayoutDocumentPane DockWidth="1*">
                                 <dock:LayoutDocument Title="Components">
                                     <views:ComponentsView/>
                                 </dock:LayoutDocument>
                             </dock:LayoutDocumentPane>
                         </dock:LayoutDocumentPaneGroup>
+
                     </dock:LayoutPanel>
                 </dock:LayoutRoot>
             </dock:DockingManager>

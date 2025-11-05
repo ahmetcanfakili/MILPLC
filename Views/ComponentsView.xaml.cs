@@ -104,7 +104,6 @@ namespace MILPLC.Views
 
             if (selectedComponent != null)
             {
-                EmptyStateText.Visibility = Visibility.Collapsed;
                 DetailsContent.Visibility = Visibility.Visible;
 
                 // Detayları doldur
@@ -115,7 +114,6 @@ namespace MILPLC.Views
             }
             else
             {
-                EmptyStateText.Visibility = Visibility.Visible;
                 DetailsContent.Visibility = Visibility.Collapsed;
             }
         }
@@ -123,13 +121,6 @@ namespace MILPLC.Views
         private void AddComponentButton_Click(object sender, RoutedEventArgs e)
         {
             var selectedComponent = ComponentsListBox.SelectedItem as ComponentItem;
-            if (selectedComponent != null)
-            {
-                MessageBox.Show($"{selectedComponent.Name} komponenti eklendi!",
-                              "Komponent Ekleme",
-                              MessageBoxButton.OK,
-                              MessageBoxImage.Information);
-            }
         }
     }
 

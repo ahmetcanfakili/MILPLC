@@ -117,16 +117,6 @@
                 <StackPanel x:Name="ComponentDetailsPanel" 
                             Margin="15">
 
-                    <!-- Varsayılan Boş Durum -->
-                    <TextBlock x:Name="EmptyStateText"
-                               Text="Bir komponent seçin veya arama yapın"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"
-                               Foreground="#6C757D"
-                               FontSize="14"
-                               TextAlignment="Center"
-                               Margin="20"/>
-
                     <!-- Komponent Detayları (Dinamik olarak doldurulacak) -->
                     <StackPanel x:Name="DetailsContent" 
                                 Visibility="Collapsed">

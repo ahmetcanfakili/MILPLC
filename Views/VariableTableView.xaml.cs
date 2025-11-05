@@ -31,24 +31,20 @@ namespace MILPLC.Views
             InitializeComponent();
             InitializeData();
             DataContext = this;
-
-            // Bind the DataGrid's ItemsSource
-            VariablesDataGrid.ItemsSource = Variables;
         }
 
         private void InitializeData()
         {
-            // Sample data - based on the visible table content
             Variables = new ObservableCollection<VariableItem>
             {
-                new VariableItem { No = 1, Name = "PBI", Class = "Local", Type = "BOOL", Location = "%IX100.0", InitialValue = "" },
-                new VariableItem { No = 2, Name = "LED", Class = "Local", Type = "BOOL", Location = "%CX100.0", InitialValue = "" },
-                new VariableItem { No = 3, Name = "my_pt", Class = "Local", Type = "TIME", Location = "", InitialValue = "T#2000ms" },
-                new VariableItem { No = 4, Name = "my_ton_in", Class = "Local", Type = "BOOL", Location = "", InitialValue = "" },
-                new VariableItem { No = 5, Name = "my_ton", Class = "Local", Type = "TON", Location = "", InitialValue = "" },
-                new VariableItem { No = 6, Name = "my_ton_q", Class = "Local", Type = "BOOL", Location = "", InitialValue = "" },
-                new VariableItem { No = 7, Name = "my_tof", Class = "Local", Type = "TOF", Location = "", InitialValue = "" },
-                new VariableItem { No = 8, Name = "my_tof_q", Class = "Local", Type = "BOOL", Location = "", InitialValue = "" }
+                new VariableItem { No = 1, Name = "PBI", Class = "Local", Type = "BOOL", Location = "%IX100.0", InitialValue = "", Option = "Input", Documentation = "Push Button Input" },
+                new VariableItem { No = 2, Name = "LED", Class = "Local", Type = "BOOL", Location = "%CX100.0", InitialValue = "", Option = "Output", Documentation = "LED Output Indicator" },
+                new VariableItem { No = 3, Name = "my_pt", Class = "Local", Type = "TIME", Location = "", InitialValue = "T#2000ms", Option = "Preset", Documentation = "Timer Preset Time" },
+                new VariableItem { No = 4, Name = "my_ton_in", Class = "Local", Type = "BOOL", Location = "", InitialValue = "", Option = "Input", Documentation = "TON Timer Input" },
+                new VariableItem { No = 5, Name = "my_ton", Class = "Local", Type = "TON", Location = "", InitialValue = "", Option = "Timer", Documentation = "On-Delay Timer" },
+                new VariableItem { No = 6, Name = "my_ton_q", Class = "Local", Type = "BOOL", Location = "", InitialValue = "", Option = "Output", Documentation = "TON Timer Output" },
+                new VariableItem { No = 7, Name = "my_tof", Class = "Local", Type = "TOF", Location = "", InitialValue = "", Option = "Timer", Documentation = "Off-Delay Timer" },
+                new VariableItem { No = 8, Name = "my_tof_q", Class = "Local", Type = "BOOL", Location = "", InitialValue = "", Option = "Output", Documentation = "TOF Timer Output" }
             };
 
             // Variable Classes
@@ -88,7 +84,7 @@ namespace MILPLC.Views
             try
             {
                 Console.WriteLine("AddRowButton_Click called");
-                Information("Adding new variable row."); 
+                Information("Adding new variable row.");
 
                 int newNo = Variables.Count > 0 ? Variables.Max(v => v.No) + 1 : 1;
                 var newVariable = new VariableItem
@@ -98,10 +94,12 @@ namespace MILPLC.Views
                     Class = "Local",
                     Type = "BOOL",
                     Location = "",
-                    InitialValue = ""
+                    InitialValue = "",
+                    Option = "",
+                    Documentation = ""
                 };
 
-                Console.WriteLine($"New variable created: {newVariable.Name}"); 
+                Console.WriteLine($"New variable created: {newVariable.Name}");
 
                 Variables.Add(newVariable);
                 Console.WriteLine($"Variable added to collection. Total variables: {Variables.Count}");
@@ -111,14 +109,13 @@ namespace MILPLC.Views
                 VariablesDataGrid.ScrollIntoView(newVariable);
                 Console.WriteLine("Row selected and scrolled into view");
 
-                Information($"New variable added: {newVariable.Name}"); 
+                Information($"New variable added: {newVariable.Name}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"ERROR: {ex.Message}"); 
+                Console.WriteLine($"ERROR: {ex.Message}");
                 Error(ex, "Error while adding new row!");
-                MessageBox.Show("Error adding new row: " + ex.Message, "Error",
-                                  MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error adding new row: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -129,24 +126,21 @@ namespace MILPLC.Views
                 var selectedVariable = VariablesDataGrid.SelectedItem as VariableItem;
                 if (selectedVariable != null)
                 {
-                    Information($"Deleting variable: {selectedVariable.Name}"); 
-
+                    Information($"Deleting variable: {selectedVariable.Name}");
                     Variables.Remove(selectedVariable);
                     UpdateRowNumbers();
-                    Information($"Variable deleted: {selectedVariable.Name}"); 
+                    Information($"Variable deleted: {selectedVariable.Name}");
                 }
                 else
                 {
-                    Warning("No row selected for deletion."); 
-                    MessageBox.Show("Please select a row to delete.", "No Selection",
-                                     MessageBoxButton.OK, MessageBoxImage.Information);
+                    Warning("No row selected for deletion.");
+                    MessageBox.Show("Please select a row to delete.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
                 Error(ex, "Error while deleting row!");
-                MessageBox.Show("Error deleting row: " + ex.Message, "Error",
-                                  MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Error deleting row: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -160,7 +154,7 @@ namespace MILPLC.Views
                     int currentIndex = Variables.IndexOf(selectedVariable);
                     if (currentIndex > 0)
                     {
-                        Debug($"Moving variable up: {selectedVariable.Name}"); 
+                        Debug($"Moving variable up: {selectedVariable.Name}");
 
                         Variables.Move(currentIndex, currentIndex - 1);
                         UpdateRowNumbers();
@@ -169,21 +163,21 @@ namespace MILPLC.Views
                         VariablesDataGrid.SelectedItem = selectedVariable;
                         VariablesDataGrid.ScrollIntoView(selectedVariable);
 
-                        Information($"Variable moved up: {selectedVariable.Name}"); 
+                        Information($"Variable moved up: {selectedVariable.Name}");
                     }
                 }
                 else
                 {
-                    Warning("No row selected to move up."); 
+                    Warning("No row selected to move up.");
                     MessageBox.Show("Please select a row to move up.", "No Selection",
-                                     MessageBoxButton.OK, MessageBoxImage.Information);
+                                   MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
                 Error(ex, "Error while moving row up!");
                 MessageBox.Show("Error moving row up: " + ex.Message, "Error",
-                                  MessageBoxButton.OK, MessageBoxImage.Error);
+                              MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -206,21 +200,21 @@ namespace MILPLC.Views
                         VariablesDataGrid.SelectedItem = selectedVariable;
                         VariablesDataGrid.ScrollIntoView(selectedVariable);
 
-                        Information($"Variable moved down: {selectedVariable.Name}"); 
+                        Information($"Variable moved down: {selectedVariable.Name}");
                     }
                 }
                 else
                 {
                     Warning("No row selected to move down.");
                     MessageBox.Show("Please select a row to move down.", "No Selection",
-                                     MessageBoxButton.OK, MessageBoxImage.Information);
+                                   MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)
             {
-                Error(ex, "Error while moving row down!"); 
+                Error(ex, "Error while moving row down!");
                 MessageBox.Show("Error moving row down: " + ex.Message, "Error",
-                                  MessageBoxButton.OK, MessageBoxImage.Error);
+                              MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -277,6 +271,8 @@ namespace MILPLC.Views
         private string _type;
         private string _location;
         private string _initialValue;
+        private string _option;
+        private string _documentation;
 
         public int No
         {
@@ -312,6 +308,18 @@ namespace MILPLC.Views
         {
             get => _initialValue;
             set { _initialValue = value; OnPropertyChanged(nameof(InitialValue)); }
+        }
+
+        public string Option
+        {
+            get => _option;
+            set { _option = value; OnPropertyChanged(nameof(Option)); }
+        }
+
+        public string Documentation
+        {
+            get => _documentation;
+            set { _documentation = value; OnPropertyChanged(nameof(Documentation)); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

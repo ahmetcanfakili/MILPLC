@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MILPLC.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="1000">
 
     <UserControl.Resources>
-        <!-- Button Stilleri -->
+        <!-- Button Styles -->
         <Style x:Key="ActionButtonStyle" TargetType="Button">
             <Setter Property="Width" Value="24"/>
             <Setter Property="Height" Value="24"/>
@@ -66,43 +66,27 @@
         <!-- Toolbar -->
         <Border Grid.Row="0" Background="#F5F5F5" BorderBrush="#CCCCCC" BorderThickness="0,0,0,1" Padding="10,5">
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="AddRowButton" Content="+" ToolTip="Add new row" 
-                        Style="{StaticResource ActionButtonStyle}" Click="AddRowButton_Click"/>
-                <Button x:Name="DeleteRowButton" Content="-" ToolTip="Delete selected row" 
-                        Style="{StaticResource ActionButtonStyle}" Click="DeleteRowButton_Click"/>
-                <Separator Width="10" Background="Transparent"/>
-                <Button x:Name="MoveUpButton" Content="↑" ToolTip="Move row up" 
-                        Style="{StaticResource ActionButtonStyle}" Click="MoveUpButton_Click"/>
-                <Button x:Name="MoveDownButton" Content="↓" ToolTip="Move row down" 
-                        Style="{StaticResource ActionButtonStyle}" Click="MoveDownButton_Click"/>
+                <Button x:Name="AddRowButton" Content="+" ToolTip="Add new row" Style="{StaticResource ActionButtonStyle}" Click="AddRowButton_Click"/>
+                <Button x:Name="DeleteRowButton" Content="-" ToolTip="Delete selected row" Style="{StaticResource ActionButtonStyle}" Click="DeleteRowButton_Click"/>
+                <Button x:Name="MoveUpButton" Content="↑" ToolTip="Move row up" Style="{StaticResource ActionButtonStyle}" Click="MoveUpButton_Click"/>
+                <Button x:Name="MoveDownButton" Content="↓" ToolTip="Move row down" Style="{StaticResource ActionButtonStyle}" Click="MoveDownButton_Click"/>
             </StackPanel>
         </Border>
 
-        <!-- DataGrid -->
+        <!-- Variables Table -->
         <DataGrid Grid.Row="1" 
-          x:Name="VariablesDataGrid"
-          ItemsSource="{Binding Variables}"
-          Style="{StaticResource VariableDataGridStyle}"
-          RowStyle="{StaticResource VariableRowStyle}"
-          SelectionChanged="VariablesDataGrid_SelectionChanged"
-          CellEditEnding="VariablesDataGrid_CellEditEnding">
-
+                  x:Name="VariablesDataGrid"
+                  ItemsSource="{Binding Variables}"
+                  Style="{StaticResource VariableDataGridStyle}"
+                  RowStyle="{StaticResource VariableRowStyle}"
+                  SelectionChanged="VariablesDataGrid_SelectionChanged"
+                  CellEditEnding="VariablesDataGrid_CellEditEnding"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <!-- No Column -->
-                <DataGridTextColumn Header="No" 
-                                    Binding="{Binding No}" 
-                                    Width="40"
-                                    IsReadOnly="True"/>
-
-                <!-- Name Column -->
-                <DataGridTextColumn Header="Name" 
-                                    Binding="{Binding Name}" 
-                                    Width="120"/>
-
-                <!-- Class Column -->
-                <DataGridComboBoxColumn Header="Class" 
-                                        Width="80"
-                                        SelectedItemBinding="{Binding Class}">
+                <DataGridTextColumn Header="#" Binding="{Binding No}" Width="40" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="120"/> 
+                <DataGridComboBoxColumn Header="Class" Width="80" SelectedItemBinding="{Binding Class}">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.VariableClasses, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
@@ -117,11 +101,7 @@
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
-
-                <!-- Type Column -->
-                <DataGridComboBoxColumn Header="Type" 
-                                        Width="100"
-                                        SelectedItemBinding="{Binding Type}">
+                <DataGridComboBoxColumn Header="Type"  Width="100" SelectedItemBinding="{Binding Type}">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding DataContext.VariableTypes, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
@@ -136,16 +116,10 @@
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
-
-                <!-- Location Column -->
-                <DataGridTextColumn Header="Location" 
-                                    Binding="{Binding Location}" 
-                                    Width="100"/>
-
-                <!-- Initial Value Column -->
-                <DataGridTextColumn Header="Initial Value" 
-                                    Binding="{Binding InitialValue}" 
-                                    Width="100"/>
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="100"/>
+                <DataGridTextColumn Header="Initial Value" Binding="{Binding InitialValue}" Width="100"/>
+                <DataGridTextColumn Header="Option" Binding="{Binding Option}" Width="120"/>
+                <DataGridTextColumn Header="Documentation" Binding="{Binding Documentation}" Width="200"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
