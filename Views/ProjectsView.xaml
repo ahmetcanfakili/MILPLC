@@ -38,11 +38,7 @@
         </Grid.RowDefinitions>
 
         <!-- Projects List -->
-        <Border Grid.Row="1" 
-                Background="White" 
-                BorderBrush="#DEE2E6" 
-                BorderThickness="1" 
-                Margin="10">
+        <Border Grid.Row="1" Background="White" BorderBrush="#DEE2E6" BorderThickness="1" Margin="10">
             <ListBox x:Name="ProjectsListBox"
                      Background="Transparent"
                      BorderThickness="0"
@@ -59,11 +55,7 @@
                             </Grid.ColumnDefinitions>
 
                             <!-- Status Indicator -->
-                            <Ellipse Grid.Column="0" 
-                                     Width="12" 
-                                     Height="12" 
-                                     Margin="0,0,10,0"
-                                     VerticalAlignment="Center">
+                            <Ellipse Grid.Column="0" Width="12" Height="12" Margin="0,0,10,0" VerticalAlignment="Center">
                                 <Ellipse.Fill>
                                     <Binding Path="Status" Converter="{StaticResource StatusColorConverter}"/>
                                 </Ellipse.Fill>
@@ -71,16 +63,9 @@
 
                             <!-- Project Info -->
                             <StackPanel Grid.Column="1" Orientation="Vertical">
-                                <TextBlock Text="{Binding Name}" 
-                                           FontWeight="SemiBold" 
-                                           FontSize="12"/>
-                                <TextBlock Text="{Binding Path}" 
-                                           FontSize="10" 
-                                           Foreground="#666"
-                                           TextTrimming="CharacterEllipsis"/>
-                                <TextBlock Text="{Binding LastModified, StringFormat='Last modified: {0:g}'}" 
-                                           FontSize="9" 
-                                           Foreground="#999"/>
+                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold" FontSize="12"/>
+                                <TextBlock Text="{Binding Path}" FontSize="10" Foreground="#666" TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="{Binding LastModified, StringFormat='Last modified: {0:g}'}" FontSize="9" Foreground="#999"/>
                             </StackPanel>
 
                             <!-- Close Button -->
@@ -128,25 +113,11 @@
         </Border>
 
         <!-- Empty State -->
-        <Border Grid.Row="1" 
-                x:Name="EmptyState" 
-                Background="#F8F9FA" 
-                Visibility="Visible">
+        <Border Grid.Row="1" x:Name="EmptyState" Background="#F8F9FA" Visibility="Visible">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="📁" 
-                           FontSize="30" 
-                           HorizontalAlignment="Center" 
-                           Margin="0,0,0,10"/>
-                <TextBlock Text="No Projects Open" 
-                           FontSize="16" 
-                           Foreground="#6C757D" 
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,5"/>
-                <TextBlock Text="Create a new project or open to get started." 
-                           FontSize="12" 
-                           Foreground="#6C757D" 
-                           HorizontalAlignment="Center"
-                           TextAlignment="Center"/>
+                <TextBlock Text="📁" FontSize="30" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                <TextBlock Text="No Projects Open" FontSize="16" Foreground="#6C757D" HorizontalAlignment="Center" Margin="0,0,0,5"/>
+                <TextBlock Text="Create a new project or open to get started." FontSize="12" Foreground="#6C757D" HorizontalAlignment="Center" TextAlignment="Center"/>
             </StackPanel>
         </Border>
     </Grid>

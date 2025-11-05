@@ -5,8 +5,94 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MILPLC.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="600" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- Ladder Element Stilleri -->
+        <Style x:Key="LadderElementStyle" TargetType="ContentControl">
+            <Setter Property="Cursor" Value="SizeAll"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        </Style>
+
+        <!-- Connection Line Stili -->
+        <Style x:Key="ConnectionLineStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="Black"/>
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <!-- Grid Line Stili -->
+        <Style x:Key="GridLineStyle" TargetType="Line">
+            <Setter Property="Stroke" Value="#E0E0E0"/>
+            <Setter Property="StrokeThickness" Value="1"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Toolbar -->
+        <Border Grid.Row="0" Background="#F5F5F5" BorderBrush="#CCCCCC" BorderThickness="0,0,0,1" Padding="10,5">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Zoom +" Click="ZoomInButton_Click" Padding="8,4" Margin="2"/>
+                <Button Content="Zoom -" Click="ZoomOutButton_Click" Padding="8,4" Margin="2"/>
+                <Separator Width="10" Background="Transparent"/>
+                <Button Content="Snap to Grid" Click="ToggleSnapToGrid_Click" Padding="8,4" Margin="2" x:Name="SnapToGridButton"/>
+                <Separator Width="10" Background="Transparent"/>
+                <TextBlock Text="Ladder Editor" FontWeight="Bold" FontSize="14" VerticalAlignment="Center" Margin="5,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Editor Area -->
+        <ScrollViewer Grid.Row="1" x:Name="MainScrollViewer" 
+                      HorizontalScrollBarVisibility="Auto" 
+                      VerticalScrollBarVisibility="Auto"
+                      Background="#F8F8F8">
+
+            <Canvas x:Name="EditorCanvas" 
+        Width="2000" 
+        Height="2000"
+        Background="White"
+        AllowDrop="True"
+        Drop="EditorCanvas_Drop"
+        DragOver="EditorCanvas_DragOver"
+        MouseMove="EditorCanvas_MouseMove"
+        MouseDown="EditorCanvas_MouseDown"
+        MouseUp="EditorCanvas_MouseUp">
+                <!-- MouseWheel event'ini kaldırdık çünkü OnMouseWheel override'ını kullanıyoruz -->
+
+                <!-- Grid Lines -->
+                <Canvas.Resources>
+                    <VisualBrush x:Key="GridPattern" TileMode="Tile" Viewport="0,0,20,20" ViewportUnits="Absolute">
+                        <VisualBrush.Visual>
+                            <Rectangle Width="20" Height="20" Fill="White" Stroke="#E0E0E0" StrokeThickness="0.5"/>
+                        </VisualBrush.Visual>
+                    </VisualBrush>
+                </Canvas.Resources>
+
+                <Rectangle Canvas.Left="0" Canvas.Top="0" 
+              Width="2000" Height="2000" 
+              Fill="{StaticResource GridPattern}"/>
+
+                <!-- Connection Lines will be added here programmatically -->
+
+                <!-- Ladder Elements will be added here programmatically -->
+
+            </Canvas>
+        </ScrollViewer>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2" Background="#E0E0E0" BorderBrush="#CCCCCC" BorderThickness="0,1,0,0" Padding="5,2">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="StatusText" Text="Ready" FontSize="11" Foreground="#666"/>
+                <TextBlock x:Name="CoordinatesText" Text=" | X: 0, Y: 0" FontSize="11" Foreground="#666" Margin="10,0,0,0"/>
+                <TextBlock x:Name="ZoomText" Text=" | Zoom: 100%" FontSize="11" Foreground="#666" Margin="10,0,0,0"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

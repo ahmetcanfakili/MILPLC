@@ -84,13 +84,8 @@ namespace MILPLC.Views
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var searchText = SearchTextBox.Text.ToLower();
-
             FilteredComponents.Clear();
-
-            var filtered = string.IsNullOrEmpty(searchText)
-                ? AllComponents
-                : AllComponents.Where(c => c.Name.ToLower().Contains(searchText) ||
-                                         c.Type.ToLower().Contains(searchText));
+            var filtered = string.IsNullOrEmpty(searchText) ? AllComponents : AllComponents.Where(c => c.Name.ToLower().Contains(searchText) || c.Type.ToLower().Contains(searchText));
 
             foreach (var item in filtered)
             {

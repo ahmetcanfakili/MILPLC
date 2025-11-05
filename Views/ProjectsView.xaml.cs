@@ -73,8 +73,7 @@ namespace MILPLC.Views
         {
             if (!File.Exists(filePath))
             {
-                MessageBox.Show($"File not found: {filePath}", "Error",
-                              MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"File not found: {filePath}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -136,8 +135,7 @@ namespace MILPLC.Views
             }
             else
             {
-                MessageBox.Show("Please select a project to close.", "No Selection",
-                              MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please select a project to close.", "No Selection", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -156,11 +154,7 @@ namespace MILPLC.Views
             // Değişiklik kontrolü (basit implementasyon)
             if (project.Status == ProjectStatus.Modified)
             {
-                var result = MessageBox.Show(
-                    $"Project '{project.Name}' has unsaved changes. Save before closing?",
-                    "Unsaved Changes",
-                    MessageBoxButton.YesNoCancel,
-                    MessageBoxImage.Question);
+                var result = MessageBox.Show($"Project '{project.Name}' has unsaved changes. Save before closing?", "Unsaved Changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
                 if (result == MessageBoxResult.Yes)
                 {
