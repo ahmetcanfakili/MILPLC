@@ -6,7 +6,148 @@
              xmlns:local="clr-namespace:MILPLC.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <!-- Project Item Stili -->
+        <Style x:Key="ProjectItemStyle" TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="10,8"/>
+            <Setter Property="Margin" Value="5,2"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#E3F2FD"/>
+                    <Setter Property="BorderBrush" Value="#2196F3"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#2196F3"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Project Status Color Converter -->
+        <local:ProjectStatusToColorConverter x:Key="StatusColorConverter"/>
+    </UserControl.Resources>
+
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Projects List -->
+        <Border Grid.Row="1" 
+                Background="White" 
+                BorderBrush="#DEE2E6" 
+                BorderThickness="1" 
+                Margin="10">
+            <ListBox x:Name="ProjectsListBox"
+                     Background="Transparent"
+                     BorderThickness="0"
+                     ItemContainerStyle="{StaticResource ProjectItemStyle}"
+                     SelectionChanged="ProjectsListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Status Indicator -->
+                            <Ellipse Grid.Column="0" 
+                                     Width="12" 
+                                     Height="12" 
+                                     Margin="0,0,10,0"
+                                     VerticalAlignment="Center">
+                                <Ellipse.Fill>
+                                    <Binding Path="Status" Converter="{StaticResource StatusColorConverter}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+
+                            <!-- Project Info -->
+                            <StackPanel Grid.Column="1" Orientation="Vertical">
+                                <TextBlock Text="{Binding Name}" 
+                                           FontWeight="SemiBold" 
+                                           FontSize="12"/>
+                                <TextBlock Text="{Binding Path}" 
+                                           FontSize="10" 
+                                           Foreground="#666"
+                                           TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="{Binding LastModified, StringFormat='Last modified: {0:g}'}" 
+                                           FontSize="9" 
+                                           Foreground="#999"/>
+                            </StackPanel>
+
+                            <!-- Close Button -->
+                            <Button Grid.Column="2" 
+                                    Content="×" 
+                                    Width="20" 
+                                    Height="20" 
+                                    Margin="10,0,5,0"
+                                    Background="Transparent" 
+                                    BorderThickness="0"
+                                    Foreground="#999"
+                                    FontWeight="Bold"
+                                    FontSize="12"
+                                    Click="CloseSingleProjectBtn_Click"
+                                    Tag="{Binding}"
+                                    ToolTip="Close Project">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="#999"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#F44336"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <!-- Active Indicator -->
+                            <Border Grid.Column="3" 
+                                    Background="#4CAF50" 
+                                    CornerRadius="10" 
+                                    Width="8" 
+                                    Height="8"
+                                    Margin="5,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Visibility="{Binding IsActive, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                    ToolTip="Active Project"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <!-- Empty State -->
+        <Border Grid.Row="1" 
+                x:Name="EmptyState" 
+                Background="#F8F9FA" 
+                Visibility="Visible">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="📁" 
+                           FontSize="30" 
+                           HorizontalAlignment="Center" 
+                           Margin="0,0,0,10"/>
+                <TextBlock Text="No Projects Open" 
+                           FontSize="16" 
+                           Foreground="#6C757D" 
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,5"/>
+                <TextBlock Text="Create a new project or open to get started." 
+                           FontSize="12" 
+                           Foreground="#6C757D" 
+                           HorizontalAlignment="Center"
+                           TextAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>
