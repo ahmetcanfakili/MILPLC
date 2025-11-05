@@ -11,7 +11,7 @@ namespace MILPLC
         protected override void OnStartup(StartupEventArgs e)
         {
             LoggerConfig.InitializeLogger();
-            Information("MILPLC Starting Başlatılıyor.");
+            Information("MILPLC Starting...");
             base.OnStartup(e);
         }
 

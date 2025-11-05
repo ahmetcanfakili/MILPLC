@@ -8,27 +8,21 @@ namespace MILPLC.Logger
     {
         public static void InitializeLogger()
         {
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-
-                .WriteTo.File(
-                    path: "logs/MILPLC-log-.txt",
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File(
+                    path: "logs/MILPLC-log-.txt", 
                     restrictedToMinimumLevel: LogEventLevel.Information,
                     rollingInterval: RollingInterval.Day,
-                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-
+                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
                 .WriteTo.Console(
                     restrictedToMinimumLevel: LogEventLevel.Debug,
                     outputTemplate: "{Timestamp:HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-
                 .CreateLogger();
-
-            Log.Information("Serilog başlatıldı. Uygulama logları izlenmeye başlandı.");
+            Log.Information("Serilog initialized. Application logs are now being monitored.");
         }
-
+        
         public static void CloseLogger()
         {
-            Log.Information("Uygulama kapatılıyor. Logger sonlandırılıyor.");
+            Log.Information("Application is shutting down. The logger is being terminated.");
             Log.CloseAndFlush();
         }
     }

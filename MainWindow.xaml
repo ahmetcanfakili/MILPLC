@@ -70,6 +70,11 @@
                                 </dock:LayoutDocument>
                             </dock:LayoutDocumentPane>
                             <dock:LayoutDocumentPane DockWidth="4*">
+                                <dock:LayoutDocument Title="Variables">
+                                    <views:VariableTableView/>
+                                </dock:LayoutDocument>
+                            </dock:LayoutDocumentPane>
+                            <dock:LayoutDocumentPane DockWidth="4*">
                                 <dock:LayoutDocument Title="Ladder Editor">
                                     <views:LadderEditorView/>
                                 </dock:LayoutDocument>
